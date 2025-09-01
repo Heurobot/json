@@ -1,0 +1,46 @@
+cmake_minimum_required(VERSION 3.10)
+project(json_checkpart)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_C_STANDARD 11)
+
+
+
+#设置编译静态库所需要的源文件
+# set(JSONCPP_SRC_FILES
+#     ${CMAKE_CURRENT_SOURCE_DIR}/staticlib/src/lib_json/*.cpp #当前源文件目录，不会自动展开所以报错
+# )
+# 设置编译静态库所需要的源文件
+
+#设置头文件搜索路径
+include_directories( 
+                    inc 
+                    staticlib/libjson  #注意:头文件的搜索路径要和引用的时候一致
+
+                ) 
+file(GLOB JSONCPP_SRC_FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/staticlib/libjson/*.cpp
+)
+
+#创建一个json静态库，json_static
+add_library(jsoncpp_static STATIC ${JSONCPP_SRC_FILES})
+#设置生成的静态库的储存路径
+set_target_properties(jsoncpp_static PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
+)
+
+
+#搜集全部源文件，生成可执行文件
+file(GLOB_RECURSE SOURCES 
+                        "src/*.cpp" 
+                             
+     )# Recursively find all .cpp files in the code directory
+
+# 生成可执行文件
+add_executable(json_test ${SOURCES})
+
+#将静态库链接到你的可执行文件
+target_link_libraries(json_test PRIVATE jsoncpp_static)
+
+
+
