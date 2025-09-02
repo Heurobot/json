@@ -6,19 +6,24 @@
 #include<sstream>   //c++ 字符流
 #include<string>    //std::string
 #include<json/json.h>  //json头文件
+#include"data_struct.h"
+#include<vector>
 
 class JsonFileTools
 {
 private:
     Json::CharReaderBuilder rbuilder;
-    Json::Value  root;
+    Json::Value root;
     /* data */
 public:
     JsonFileTools(/* args */);
     ~JsonFileTools();
+
+    std::vector<Msg> Msgarray;
     
     Json::Value readJsonFile(const std::string & filename);//文件读取json文件
     void WriteFileJson(std::string filePath);
+    
 
 
 

@@ -1,0 +1,30 @@
+[
+  {
+    "ComponentName": "EVSE",
+    "ComponentInstance": "",
+    "VariableName": "Power",
+    "VariableInstance": "",
+    "AttributeType": "0",
+    "AttributeValue": "",
+    "Mode": "1",
+    "ValueList": "",
+    "DataType": "1",
+    "Private": "false",
+    "ValueRange":"",
+    "Unit": "W"
+  },
+  {
+    "ComponentName": "NetworkingCtrlr",
+    "ComponentInstance": "",
+    "VariableName": "IsConfigured",
+    "VariableInstance": "LAN",
+    "AttributeType": "0",
+    "AttributeValue": "false",
+    "Mode": "1",
+    "ValueList": "true,false",
+    "DataType": "4",
+    "Private": "false",
+    "ValueRange":"",
+    "Unit": ""
+  }
+]

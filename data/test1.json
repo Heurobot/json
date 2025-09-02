@@ -1,11 +1,32 @@
-{
-   "age" : 23,
-   "hobby" : [ "Run", "Sing", "Dance" ],
-   "major" : {
-      "subject1" : "C++",
-      "subject2" : "Java",
-      "subject3" : "Go"
+
+
+[
+   {
+      "AttributeType" : "0",
+      "AttributeValue" : "",
+      "ComponentInstance" : "",
+      "ComponentName" : "EVSE",
+      "DataType" : "1",
+      "Mode" : "1",
+      "Private" : "false",
+      "Unit" : "W",
+      "ValueList" : "",
+      "ValueRange" : "",
+      "VariableInstance" : "",
+      "VariableName" : "Power"
    },
-   "name" : "Cain",
-   "sex" : "man"
-}
+   {
+      "AttributeType" : "0",
+      "AttributeValue" : "false",
+      "ComponentInstance" : "",
+      "ComponentName" : "NetworkingCtrlr",
+      "DataType" : "4",
+      "Mode" : "1",
+      "Private" : "false",
+      "Unit" : "",
+      "ValueList" : "true,false",
+      "ValueRange" : "",
+      "VariableInstance" : "LAN",
+      "VariableName" : "IsConfigured"
+   }
+]

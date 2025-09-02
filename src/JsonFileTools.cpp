@@ -37,37 +37,47 @@ Json::Value JsonFileTools::readJsonFile(const std::string &filename)
 void JsonFileTools::WriteFileJson(std::string filePath)
 {
 	// 写入下列指定内容
-	const char *str = "{\
-						\"name\":\"Cain\",\
-						\"sex\":\"man\",\
-						\"age\":23,\
-						\"hobby\":[\"Run\",\"Sing\",\"Dance\"],\
-						\"major\":[\
-						{\"subject1\":\"C++\"},\
-						{\"subject2\":\"Jave\"},\
-						{\"subject3\":\"Go\"}]\
-						}";
+	// Json::Value root;
+	// root["name"] = Json::Value("Cain");
+	// root["sex"] = Json::Value("man");
+	// root["age"] = Json::Value(23);
 
-	Json::Value root;
-	root["name"] = Json::Value("Cain");
-	root["sex"] = Json::Value("man");
-	root["age"] = Json::Value(23);
+	// // 数组形式
+	// root["hobby"].append("Run");
+	// root["hobby"].append("Sing");
+	// root["hobby"].append("Dance");
 
-	// 数组形式
-	root["hobby"].append("Run");
-	root["hobby"].append("Sing");
-	root["hobby"].append("Dance");
+	// Json::Value Sub;
+	// // 子节点属性
+	// Sub["subject1"] = Json::Value("C++");
+	// Sub["subject2"] = Json::Value("Java");
+	// Sub["subject3"] = Json::Value("Go");
 
-	Json::Value Sub;
-	// 子节点属性
-	Sub["subject1"] = Json::Value("C++");
-	Sub["subject2"] = Json::Value("Java");
-	Sub["subject3"] = Json::Value("Go");
-
-	// 将子节点内容挂到父节点(root)上
-	root["major"] = Json::Value(Sub);
+	// // 将子节点内容挂到父节点(root)上
+	// root["major"] = Json::Value(Sub);
 
 	/* 测试内容：会在屏幕输出 */
+	Json::Value root(Json::arrayValue);
+	
+
+	for (const auto &items : Msgarray)
+	{
+		Json::Value temp;
+
+		temp["ComponentName"] = Json::Value(items.ComponentName);
+		temp["ComponentInstance"] = Json::Value(items.ComponentInstance);
+		temp["VariableName"] = Json::Value(items.VariableName);
+		temp["VariableInstance"] = Json::Value(items.VariableInstance);
+		temp["AttributeType"] = Json::Value(items.AttributeType);
+		temp["AttributeValue"] = Json::Value(items.AttributeValue);
+		temp["Mode"] = Json::Value(items.Mode);
+		temp["ValueList"] = Json::Value(items.ValueList);
+		temp["DataType"] = Json::Value(items.DataType);
+		temp["Private"] = Json::Value(items.Private);
+		temp["ValueRange"] = Json::Value(items.ValueRange);
+		temp["Unit"] = Json::Value(items.Unit);
+		root.append(temp);
+	}
 	std::cout << "styledwriter: " << std::endl;
 	Json::StyledWriter sw;
 	std::cout << sw.write(root) << std::endl;
