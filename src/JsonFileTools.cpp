@@ -14,22 +14,75 @@ JsonFileTools::~JsonFileTools()
 Json::Value JsonFileTools::readJsonFile(const std::string &filename)
 {
 
-    std::ifstream ifs;
-    if (!ifs.is_open())
-    {
-        ifs.open(filename);
-    }
+	std::ifstream ifs;
+	if (!ifs.is_open())
+	{
+		ifs.open(filename);
+	}
 
-    std::string errs;
-    bool parsingSuccessful = Json::parseFromStream(rbuilder, ifs, &root, &errs);
-    if (!parsingSuccessful)
-    {
-        // report to the user the failure and their locations in the document.
-        std::cout << "Failed to parse configuration\n"
-                  << errs;
-        return Json::Value();
-    }
-    ifs.clear();
-    ifs.close();
-    return root; // 类的属性私有
+	std::string errs;
+	bool parsingSuccessful = Json::parseFromStream(rbuilder, ifs, &root, &errs);
+	if (!parsingSuccessful)
+	{
+		// report to the user the failure and their locations in the document.
+		std::cout << "Failed to parse configuration\n"
+				  << errs;
+		return Json::Value();
+	}
+	ifs.clear();
+	ifs.close();
+	return root; // 类的属性私有
+}
+
+void JsonFileTools::WriteFileJson(std::string filePath)
+{
+	// 写入下列指定内容
+	const char *str = "{\
+						\"name\":\"Cain\",\
+						\"sex\":\"man\",\
+						\"age\":23,\
+						\"hobby\":[\"Run\",\"Sing\",\"Dance\"],\
+						\"major\":[\
+						{\"subject1\":\"C++\"},\
+						{\"subject2\":\"Jave\"},\
+						{\"subject3\":\"Go\"}]\
+						}";
+
+	Json::Value root;
+	root["name"] = Json::Value("Cain");
+	root["sex"] = Json::Value("man");
+	root["age"] = Json::Value(23);
+
+	// 数组形式
+	root["hobby"].append("Run");
+	root["hobby"].append("Sing");
+	root["hobby"].append("Dance");
+
+	Json::Value Sub;
+	// 子节点属性
+	Sub["subject1"] = Json::Value("C++");
+	Sub["subject2"] = Json::Value("Java");
+	Sub["subject3"] = Json::Value("Go");
+
+	// 将子节点内容挂到父节点(root)上
+	root["major"] = Json::Value(Sub);
+
+	/* 测试内容：会在屏幕输出 */
+	std::cout << "styledwriter: " << std::endl;
+	Json::StyledWriter sw;
+	std::cout << sw.write(root) << std::endl;
+
+	std::fstream os;
+	os.open(filePath, std::ios::out | std::ios::app);
+	if (!os.is_open())
+	{
+		std::cout << "Error: can not find or create the file which named " << filePath << std::endl;
+	}
+	else
+	{
+		std::cout << "successful: file write is success! " << std::endl;
+	}
+
+	os << sw.write(root);
+	os.close();
 }

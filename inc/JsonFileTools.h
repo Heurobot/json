@@ -17,7 +17,8 @@ public:
     JsonFileTools(/* args */);
     ~JsonFileTools();
     
-    Json::Value readJsonFile(const std::string & filename);
+    Json::Value readJsonFile(const std::string & filename);//文件读取json文件
+    void WriteFileJson(std::string filePath);
 
 
 

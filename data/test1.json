@@ -1,0 +1,11 @@
+{
+   "age" : 23,
+   "hobby" : [ "Run", "Sing", "Dance" ],
+   "major" : {
+      "subject1" : "C++",
+      "subject2" : "Java",
+      "subject3" : "Go"
+   },
+   "name" : "Cain",
+   "sex" : "man"
+}
